@@ -155,6 +155,8 @@
       false))
   (find-by-id [this id]
     (id @(:content this)))
+  (select-by-id [this id keys]
+    (select-keys (id @(:content this)) keys))
   (find-by-property [this [property-type value]]
     (get-in @(:index this) [property-type value]))
   (find-by-relation [this [relation-type value]]

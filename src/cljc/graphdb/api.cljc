@@ -13,5 +13,6 @@
   (add-relations [this id relations])
   (remove-relations [this id relations])
   (find-by-id [this id])
+  (select-by-id [this id keys])
   (find-by-property [this property])
   (find-by-relation [this relation]))

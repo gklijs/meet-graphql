@@ -48,11 +48,13 @@
   (eval `(deftest ~(symbol "test-add-relations")
            (is (=
                  ~(api/add-relations db :user/gklijs {:user/knows #{:user/cklijs :user/richhickey :user/mmouse}, :work/employer :work/open-web})
-                 #:user{:name "Gerard", :user/knows #{:user/cklijs :user/richhickey :user/mmouse}, :work/employer #{:work/open-web}}))))
+                 #:user{:name "Gerard", :knows #{:user/cklijs :user/richhickey :user/mmouse}, :work/employer #{:work/open-web}}))))
+  (eval `(deftest ~(symbol "test-select-by-id")
+           (is (= ~(api/select-by-id db :user/gklijs [:user/foo :work/employer]) #:work{:employer #{:work/open-web}}))))
   (eval `(deftest ~(symbol "test-remove-relations")
            (is (=
                  ~(api/remove-relations db :user/gklijs {:user/knows :user/mmouse, :work/employer :work/open-web})
-                 #:user{:name "Gerard", :user/knows #{:user/cklijs :user/richhickey}}))))
+                 #:user{:name "Gerard", :knows #{:user/cklijs :user/richhickey}}))))
   (eval `(deftest ~(symbol "test-find-by-property")
            (is (= ~(api/find-by-property db [:user/name "Gerard"]) #{:user/gklijs}))))
   (eval `(deftest ~(symbol "test-find-by-relation")
